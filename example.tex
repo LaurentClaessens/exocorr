@@ -1,0 +1,53 @@
+% This is the example file for SystemeCorr.sty
+% Remarks are put in comments.
+
+\documentclass[a4paper,12pt]{book}
+
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{hyperref}			% Almost obligatory
+\usepackage{ifthen}			% mandatory
+\usepackage{SystemeCorr}		% Invoke the package
+					% has to be put after inpuenc and fontenc because of the french ``à`` and ''é``
+
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry} 
+\usepackage[english,frenchb]{babel}
+
+
+\begin{document}
+
+\corrPolitique{2}	% Set to	0 for no corrections at all
+			%		1 for having the corrections bellow each exercises (handy when working on the text)
+			%		2 for having the corrections in a separated chapter (a link is then created)
+			% See \corrChapitre bellow
+
+% In order to create links to wikipedia, use
+% \wikipedia{<language>}{<article>}{<text>}
+% This will print <text> in your document and turn it into a link to
+% http://<language>.wikipedia.org/wiki/<article>
+% <language> can be fr, en, nl, etc.
+Ceci est une lien vers wikipedia avec des accents : \wikipedia{fr}{Développement_de_Taylor}{Wikipédia} (en français, cela peut être un problème). This is a link to the \wikipedia{nl}{Nederlandstalige_Wikipedia}{Nederlandstalige} wikipedia.
+
+\chapter{Exercises}
+
+% The following lines are copy-pasted from the output of the command line
+% liste_exo.py Example 1 3
+\Exo{Example0001}
+\Exo{Example0002}
+\Exo{Example0003}
+
+% If \corrPolitique{2}, the following line creates a chapter (I let you guess the title) which contains the corrections
+% If \corrPolitique{0} or \corrPolitique{1}, does nothing
+\corrChapitre{Correction of some exercises}
+
+
+\end{document}
