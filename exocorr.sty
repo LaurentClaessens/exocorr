@@ -39,10 +39,11 @@
 \newenvironment{exercice}[1][]{%
 \refstepcounter{CountExercice}%
 \setlength{\SymbolWidth}{\widthof{#1}}%
+\par
 \noindent%
 \hspace{-\SymbolWidth}
 \hspace{-15pt}
-{\bf #1 \@ExoTheoremName \theCountExercice}\noindent%
+{\bf #1 \@ExoTheoremName\ \theCountExercice}\noindent%
 }{}
 %\newenvironment{exercice}[1]{Exercice}{}
 
@@ -68,7 +69,7 @@
 }		% Fin de la macro \corrChapitre
 
 \newcommand{\corrref}[1]{%
-\ifthenelse{\value{@CorrPosition}=2}{\par \@LinkToCorrText \pageref{corr#1}.}{}%
+\ifthenelse{\value{@CorrPosition}=2}{\par \@LinkToCorrText\ \pageref{corr#1}.}{}%
 }
 
 \newcommand{\Exo}[1]{%
