@@ -28,7 +28,7 @@ r"""
 This program is intended to be used in coordination with the LaTeX package SystemeCorr.sty
 
 Invoking 
-./liste_exo XXX 1 20
+	./liste_exo XXX 1 20
 creates the files exoXXX0001.tex up to exoXXX0020.tex and corrXXX0001.tex up to corrXXX0020.tex
 
 The files are pre-filled as follows :
@@ -51,6 +51,22 @@ File corrXXX0001.tex contains
 
 \end{corrige}
 ---------end ----------------
+
+Notice that XXX is used in order to produce LaTeX's label, thus you have to only use legal LaTeX characters.
+As an example, if you want to create a list of exercises about general topology, you may be tempted to invoke
+	./liste_exo.py General_topology 1 10
+Do not do so because the character «_» is not a legal character in LaTeX's labels. Use instead
+	./liste_exo.py GeneralTopology 1 10
+or
+	./liste_exo.py General-Topology 1 10
+
+A good idea is to give «-» as last character :
+	./liste_exo.py MyList- 1 10
+will produce the files
+exoMyList-0001.tex
+corrMyList-0001.tex
+which separates clearly the number from the name.
+
 
 Moreover the content of fdl-notice.txt is added at the top of each file. An example file is provided.
 YOU SHOULD CHANGE fdf-notice.txt BEFORE USE : PUT YOUR INFORMATIONS.

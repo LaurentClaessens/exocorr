@@ -10,3 +10,6 @@ Read the example file example.tex to learn how to use.
 The script liste_exo.py automatically create the needed files use :
 liste_exo.py NameOfMyListOfExercises 1 30
 this creates 30*2 files with the labels and everything you need.
+
+Read the description inside liste_exo.py for efficient use.
+
