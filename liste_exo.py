@@ -33,21 +33,21 @@ creates the files exoXXX0001.tex up to exoXXX0020.tex and corrXXX0001.tex up to 
 
 The files are pre-filled as follows :
 
--------------- file exoXXX0001.tex --------
+-------------- file exoXXX-0001.tex --------
 \begin{exercice}\label{exoXXX0001}
 
-<+ExoXXX0001+>
+<+ExoXXX-0001+>
 
 \corrref{XXX0001}
 \end{exercice}
 
 ---------end ----------------
 
-File corrXXX0001.tex contains 
--------------- file corrXXX0001.tex --------
-\begin{corrige}{XXX0001}
+File corrXXX-0001.tex contains 
+-------------- file corrXXX-0001.tex --------
+\begin{corrige}{XXX-0001}
 
-<+CorrXXX0001+>
+<+CorrXXX-0001+>
 
 \end{corrige}
 ---------end ----------------
@@ -59,14 +59,6 @@ Do not do so because the character «_» is not a legal character in LaTeX's lab
 	./liste_exo.py GeneralTopology 1 10
 or
 	./liste_exo.py General-Topology 1 10
-
-A good idea is to give «-» as last character :
-	./liste_exo.py MyList- 1 10
-will produce the files
-exoMyList-0001.tex
-corrMyList-0001.tex
-which separates clearly the number from the name.
-
 
 Moreover the content of fdl-notice.txt is added at the top of each file. An example file is provided.
 YOU SHOULD CHANGE fdf-notice.txt BEFORE USE : PUT YOUR INFORMATIONS.
