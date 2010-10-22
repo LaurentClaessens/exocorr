@@ -66,7 +66,7 @@ YOU SHOULD CHANGE fdf-notice.txt BEFORE USE : PUT YOUR INFORMATIONS.
 After creating the files, diplay the lines to be copy-pasted in you LaTeX file and the ones which add all these files in you local git repository.
 """
 
-# Avant d'utiliser ce scipt, voir si il ne faut pas ajouter une mention de FDL au début des fichiers.
+# Avant d'utiliser ce script, voir si il ne faut pas ajouter une mention de FDL au début des fichiers.
 #  Par défaut, il met le fichier fdl-notice.txt.  En cas d'oubli, les lignes suivantes peuvent sauver la vie.
 # for f in corrINGE1114-00* ; do (cat fdl-notice.txt $f)>$f.tmp  ;done
 # for f in corrINGE1114-00*; do mv $f.tmp $f ;done
