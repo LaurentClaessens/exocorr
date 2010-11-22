@@ -106,6 +106,6 @@ for i in range(deb,fin+1) :
 
 print "git add ",
 for f in liste_fichier_exo :
-	print f.filename,
+	print f.basename,
 for f in liste_fichier_corr :
-	print f.filename,
+	print f.basename,
