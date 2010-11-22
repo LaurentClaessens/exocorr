@@ -29,7 +29,7 @@ This program is intended to be used in coordination with the LaTeX package Syste
 
 Invoking 
 	./liste_exo XXX 1 20
-creates the files exoXXX0001.tex up to exoXXX0020.tex and corrXXX0001.tex up to corrXXX0020.tex
+creates the files exoXXX0001.tex up to exoXXX-0020.tex and corrXXX-0001.tex up to corrXXX-0020.tex
 
 The files are pre-filled as follows :
 
@@ -90,7 +90,7 @@ liste_fichier_exo =[]
 liste_fichier_corr =[]
 
 for i in range(deb,fin+1) :
-	label = NomGene+AjouteZero(i)+"-"
+	label = NomGene+"-"+AjouteZero(i)
 	fCorr = manip.Fichier("corr"+label+".tex")
 	fExo = manip.Fichier("exo"+label+".tex")
 	liste_fichier_exo.append(fExo)
