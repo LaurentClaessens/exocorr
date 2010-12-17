@@ -11,6 +11,8 @@
 % This package can be downloaded from
 % git@gitorious.org:exocorr/exocorr.git
 
+% this package needs the package calc for computation with \widthof
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{exocorr}[31/01/2009, version 0.1]
 
@@ -19,22 +21,19 @@
 \DeclareOption{fr}{\setboolean{LangageFR}{true}}
 \ProcessOptions
 
-% English default texts
-
+% ENGLISH DEFAULT TEXTS
 \newcommand{\@ExoTheoremName}{Exercise}
 \newcommand{\@CorrText}{Correction of the exercise}
 \newcommand{\@AlternativeText}{Other resolution}
 \newcommand{\@LinkToCorrText}{Correction at page}
 
-% French translations
-
+% FRENCH TRANSLATIONS
 \ifthenelse{\boolean{LangageFR}}{%
 \renewcommand{\@ExoTheoremName}{Exercice}
 \renewcommand{\@CorrText}{Correction de l'exercice}
 \renewcommand{\@AlternativeText}{Résolution alternative}
 \renewcommand{\@LinkToCorrText}{Correction à la page}
 }{}
-
  
 \newcounter{CountExercice}
 
