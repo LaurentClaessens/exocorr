@@ -90,7 +90,7 @@ liste_fichier_exo =[]
 liste_fichier_corr =[]
 
 for i in range(deb,fin+1) :
-	label = NomGene+"-"+AjouteZero(i)
+	label = NomGene+"_"+AjouteZero(i)
 	fCorr = manip.Fichier("corr"+label+".tex")
 	fExo = manip.Fichier("exo"+label+".tex")
 	liste_fichier_exo.append(fExo)
