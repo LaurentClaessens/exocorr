@@ -86,6 +86,13 @@ NomGene = args[0]
 deb = int(args[1])
 fin = int(args[2])
 
+interdits=["_"]
+for c in interdits:
+    if c in NomGene:
+        texte="Le caractère {0} est interdit dans un label".format(c)
+        raise NameError,texte
+
+
 liste_fichier_exo =[]
 liste_fichier_corr =[]
 
