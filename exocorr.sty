@@ -74,11 +74,19 @@
 \ifthenelse{\value{@CorrPosition}=2}{\par \@LinkToCorrText\ \pageref{corr#1}.}{}%
 }
 
-\newcommand{\Exo}[1]{%
-\input{exo#1}
-\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#1.tex}{\input{corr#1}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#1.tex}{\immediate\write\FichCorr{\string\input{corr#1}}}{}}{}
+% The optional first argument says if you want to include the correction.
+% \Exo{bla}  will include the correction (if exists)
+% \Exo[0]{bla} will not include the correction, even if it exists
+
+\newcommand{\Exo}[2][1]{%
+\input{exo#2}
+\ifthenelse{#1=1}{
+\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\immediate\write\FichCorr{\string\input{corr#2}}}{}}{}
 }
+{}
+}
+
 % Ces histoires de \newwrite pour écrire dans un fichier sont par exemple expliquées sur le fctt [1]
 % Le \immediate vient de la discussion fctt [2]
 
