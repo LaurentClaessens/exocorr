@@ -11,7 +11,9 @@
 % This package can be downloaded from
 % git@gitorious.org:exocorr/exocorr.git
 
-% this package needs the package calc for computation with \widthof
+% this package needs the following packages : 
+% calc           for computation with \widthof
+% ifthen         for \newboolean and \ifthenelse
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{exocorr}[31/01/2009, version 0.1]
@@ -62,15 +64,24 @@
 % Pour mettre les corrigés au bout, il faut initialiser le fichier dans lequel on écrit.
 % \@InterCorrFile is the name of the file that will contain the \input of the corrections files.
 \newcommand{\@DefaultCorrFileName}{corr}
-\newwrite\FichCorr
-\immediate\openout\FichCorr=\@DefaultCorrFileName
-\newcommand{\@InterCorrFile}{\FichCorr}
 
-\newcommand{\corrChapitre}[1][\@DefaultCorrFileName]{%
+
+\newcommand{\NewCorrectionFile}[1]
+{%
+\newwrite\#1
+%\immediate\openout\Fichier=#1
+%\@namedef{nomfichier@\the\File#1}{#1}
+}
+
+\NewCorrectionFile{corr}
+\newcommand{\InterCorrFile}{\Fichcorr}
+
+
+\newcommand{\corrChapitre}[2][\Filecorr]{%
 \ifthenelse{\value{@CorrPosition}=2}{%
 \chapter{#2}
-	\immediate\closeout\FichCorr
-	\input{#1}
+	\immediate\closeout#1
+    \input{\@nameuse{nomfichier@\the\File#1}}
 }{}		% Fin du ifthenelse
 }		% Fin de la macro \corrChapitre
 
@@ -90,7 +101,7 @@
 \input{exo#2}
 \ifthenelse{#1=1}{
 \ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\immediate\write\@InterFichCorr{\string\input{\@corrRepertory corr#2}}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\immediate\write\InterCorrFile{\string\input{\@corrRepertory corr#2}}}{}}{}
 }
 {}
 }
