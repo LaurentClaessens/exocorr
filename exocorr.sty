@@ -60,20 +60,27 @@
 % 2 : Corrections in a specific chapter, use \corrChapitre
 
 % Pour mettre les corrigés au bout, il faut initialiser le fichier dans lequel on écrit.
+% \@InterCorrFile is the name of the file that will contain the \input of the corrections files.
+\newcommand{\@DefaultCorrFileName}{corr}
 \newwrite\FichCorr
-\immediate\openout\FichCorr=corr	
+\immediate\openout\FichCorr=\@DefaultCorrFileName
+\newcommand{\@InterCorrFile}{\FichCorr}
 
-\newcommand{\corrChapitre}[1]{%
+\newcommand{\corrChapitre}[1][\@DefaultCorrFileName]{%
 \ifthenelse{\value{@CorrPosition}=2}{%
-\chapter{#1}
+\chapter{#2}
 	\immediate\closeout\FichCorr
-	\input{corr}
+	\input{#1}
 }{}		% Fin du ifthenelse
 }		% Fin de la macro \corrChapitre
 
 \newcommand{\corrref}[1]{%
 \ifthenelse{\value{@CorrPosition}=2}{\par \@LinkToCorrText\ \pageref{corr#1}.}{}%
 }
+
+% \@corrRepertory is the name of the directory in which the correction file has to be searched. 
+% By default it is the current repertory.
+\newcommand{\@corrRepertory}{}
 
 % The optional first argument says if you want to include the correction.
 % \Exo{bla}  will include the correction (if exists)
@@ -83,7 +90,7 @@
 \input{exo#2}
 \ifthenelse{#1=1}{
 \ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\immediate\write\FichCorr{\string\input{corr#2}}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\immediate\write\@InterFichCorr{\string\input{\@corrRepertory corr#2}}}{}}{}
 }
 {}
 }
