@@ -11,9 +11,10 @@
 % This package can be downloaded from
 % git@gitorious.org:exocorr/exocorr.git
 
-% this package needs the following packages : 
+% this package requires the following packages : 
 % calc           for computation with \widthof
 % ifthen         for \newboolean and \ifthenelse
+% import         
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{exocorr}[31/01/2009, version 0.1]
@@ -61,27 +62,71 @@
 % 1 : Correction immediately under the questions
 % 2 : Corrections in a specific chapter, use \corrChapitre
 
-% Pour mettre les corrigés au bout, il faut initialiser le fichier dans lequel on écrit.
+
+% \CorrectionRepertory is the name of the directory in which the correction file has to be searched. 
+% By default it is the current repertory.
+\newcommand{\CorrectionRepertory}{}
+
+
+
+% The multiple-file system for corrections comes from the answer by mpg
+% in the thread «\closeout d'un fichier dont je ne connais que le nom ou savoir le nom d'un \newwrite» 
+% on the french speaking usent LaTeX forum.
+
+
+% The function \stream@name produce the name of the stream in which we can write from
+% the name of the file.
+% For the file foo.tex, the stream will be named f@streal@foo
+% Thus one write in foo.tex by \write\f@stream@foo
+\newcommand \stream@name [1] {%
+%f@stream@\detokenize{#1}% 
+  f@stream@{#1}% 
+}
+
+\newcommand \NewCorrectionFile [1] {% #1 = filename
+  \expandafter \New@CorrectionFile \csname\stream@name{#1}\endcsname {#1}% (2)
+}
+
+\newcommand \New@CorrectionFile [2] {% #1 = command, #2 = filename
+  \newwrite #1%
+  \immediate\openout #1 #2\relax
+}
+
+\newcommand \WriteInFile [2] {% #1 = nom de fichier, #2 = contenu
+  \immediate\write \csname\stream@name{#1}\endcsname {#2}% (3)
+}
+\newcommand \CloseFile [1] {% #1 = nom de fichier
+  \immediate\closeout \csname\stream@name{#1}\endcsname % (3)
+}
+
 % \@InterCorrFile is the name of the file that will contain the \input of the corrections files.
 \newcommand{\@DefaultCorrFileName}{corr}
 
+\NewCorrectionFile{\@DefaultCorrFileName}
+\newcommand{\InterCorrFile}{\@DefaultCorrFileName}
 
-\newcommand{\NewCorrectionFile}[1]
-{%
-\newwrite\#1
-%\immediate\openout\Fichier=#1
-%\@namedef{nomfichier@\the\File#1}{#1}
+\newcommand{\UseCorrectionFile}[1]{%
+\renewcommand{\InterCorrFile}{#1}
 }
 
-\NewCorrectionFile{corr}
-\newcommand{\InterCorrFile}{\Fichcorr}
+% The optional first argument says if you want to include the correction.
+% \Exo{bla}  will include the correction (if exists)
+% \Exo[0]{bla} will not include the correction, even if it exists
+\newcommand{\Exo}[2][1]{%
+\input{exo#2}
+\ifthenelse{#1=1}{
+\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
+}
+{}
+}
 
 
-\newcommand{\corrChapitre}[2][\Filecorr]{%
+\newcommand{\corrChapitre}[2][\InterCorrFile]{%
 \ifthenelse{\value{@CorrPosition}=2}{%
 \chapter{#2}
-	\immediate\closeout#1
-    \input{\@nameuse{nomfichier@\the\File#1}}
+\CloseFile{#1}
+    \input{#1}
 }{}		% Fin du ifthenelse
 }		% Fin de la macro \corrChapitre
 
@@ -89,22 +134,6 @@
 \ifthenelse{\value{@CorrPosition}=2}{\par \@LinkToCorrText\ \pageref{corr#1}.}{}%
 }
 
-% \@corrRepertory is the name of the directory in which the correction file has to be searched. 
-% By default it is the current repertory.
-\newcommand{\@corrRepertory}{}
-
-% The optional first argument says if you want to include the correction.
-% \Exo{bla}  will include the correction (if exists)
-% \Exo[0]{bla} will not include the correction, even if it exists
-
-\newcommand{\Exo}[2][1]{%
-\input{exo#2}
-\ifthenelse{#1=1}{
-\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\immediate\write\InterCorrFile{\string\input{\@corrRepertory corr#2}}}{}}{}
-}
-{}
-}
 
 % Ces histoires de \newwrite pour écrire dans un fichier sont par exemple expliquées sur le fctt [1]
 % Le \immediate vient de la discussion fctt [2]
