@@ -167,6 +167,12 @@
    \href{http://#1.wikipedia.org/wiki/\result}{#3}% 
 } 
 
+\newcommand{\wikiversity}[3]{% 
+   \saveexpandmode\noexpandarg 
+   \MakeUTFPerCent{#2}% 
+   \restoreexpandmode 
+   \href{http://#1.wikiversity.org/wiki/\result}{#3}% 
+} 
 \endinput
 
 % [1] http://groups.google.fr/group/fr.comp.text.tex/browse_thread/thread/76eb44e2e928ba8b/ab0f092c79a062cd?hl=fr&lnk=gst&q=newwrite#ab0f092c79a062cd 
