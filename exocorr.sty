@@ -121,7 +121,6 @@
 {}
 }
 
-
 \newcommand{\corrChapitre}[2][\InterCorrFile]{%
 \ifthenelse{\value{@CorrPosition}=2}{%
 \chapter{#2}
@@ -133,7 +132,6 @@
 \newcommand{\corrref}[1]{%
 \ifthenelse{\value{@CorrPosition}=2}{\par \@LinkToCorrText\ \pageref{corr#1}.}{}%
 }
-
 
 % Ces histoires de \newwrite pour écrire dans un fichier sont par exemple expliquées sur le fctt [1]
 % Le \immediate vient de la discussion fctt [2]
