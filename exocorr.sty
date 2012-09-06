@@ -53,7 +53,8 @@
 }{}
 %\newenvironment{exercice}[1]{Exercice}{}
 
-\newenvironment{corrige}[1]{\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\label{corr#1}\par\nopagebreak}{}
+%\newenvironment{corrige}[1]{\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\label{corr#1}\par\nopagebreak}{}
+\newenvironment{corrige}[1]{\label{corr#1}\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\par\nopagebreak}{}
 \newenvironment{alternative}{\par\bigskip\noindent {\bf \@AlternativeText\ }\par\nopagebreak}{}
 
 \newcounter{@CorrPosition}
