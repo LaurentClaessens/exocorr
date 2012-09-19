@@ -41,6 +41,11 @@
 \newcounter{CountExercice}
 \renewcommand{\theCountExercice}{\arabic{CountExercice}}
 
+\newcounter{@corrDraft}
+\setcounter{@corrDraft}{0}
+\newcommand{\corrDraft}{\setcounter{@corrDraft}{1}}
+% When @corrDraft is 1, a tag is added in the document in order to indicate the file name
+
 \newlength{\SymbolWidth}
 \newenvironment{exercice}[1][]{%
 \refstepcounter{CountExercice}%
@@ -54,7 +59,7 @@
 %\newenvironment{exercice}[1]{Exercice}{}
 
 %\newenvironment{corrige}[1]{\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\label{corr#1}\par\nopagebreak}{}
-\newenvironment{corrige}[1]{\label{corr#1}\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\par\nopagebreak}{}
+\newenvironment{corrige}[1]{\label{corr#1}\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\par\nopagebreak \ifthenelse{\value{@corrDraft}=1}{--#1--}{} }{}
 \newenvironment{alternative}{\par\bigskip\noindent {\bf \@AlternativeText\ }\par\nopagebreak}{}
 
 \newcounter{@CorrPosition}
@@ -116,8 +121,8 @@
 \newcommand{\Exo}[2][1]{%
 \input{exo#2}
 \ifthenelse{#1=1}{
-\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
+\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\ifthenelse{\value{@corrDraft}=1}{--#2--}{}\input{corr#2}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\ifthenelse{\value{@corrDraft}=1}{--#2--}{}\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
 }
 {}
 }
