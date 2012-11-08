@@ -121,8 +121,8 @@
 \newcommand{\Exo}[2][1]{%
 \input{exo#2}
 \ifthenelse{#1=1}{
-\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}\ifthenelse{\value{@corrDraft}=1}{--#2--}{}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\ifthenelse{\value{@corrDraft}=1}{--#2--}{}\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
+\ifthenelse{\value{@CorrPosition}=1}{\ifthenelse{\value{@corrDraft}=1}{--#2--}{}\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\ifthenelse{\value{@corrDraft}=1}{--#2--}{}\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
 }
 {}
 }
