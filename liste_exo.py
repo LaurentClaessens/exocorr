@@ -22,6 +22,7 @@
 # email: moky.math@gmail.com
 
 import os, sys
+import datetime
 import manip
 
 r"""
@@ -73,6 +74,9 @@ After creating the files, diplay the lines to be copy-pasted in you LaTeX file a
 
 notice_fdl = manip.Fichier("fdl-notice.txt").texte()
 print notice_fdl
+year=datetime.datetime.now().year
+if str(year) not in notice_fdl:
+    raise ValueError,"The FDL notice should contain the year {}".format(year)
 
 def AjouteZero(n):
 	N = str(n)
