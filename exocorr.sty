@@ -14,7 +14,10 @@
 % this package requires the following packages : 
 % calc           for computation with \widthof
 % ifthen         for \newboolean and \ifthenelse
-% import         
+
+
+
+% import         Is no more required from June, 10, 2013
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{exocorr}[31/01/2009, version 0.1]
@@ -123,7 +126,8 @@
 \ifthenelse{\value{@corrDraft}=1}{--#2--}{}%
 \ifthenelse{#1=1}{
 \ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
+%\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\input{corr#2}}}{}}{}
 }
 {}
 }
