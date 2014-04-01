@@ -115,7 +115,8 @@
 \newcommand{\InterCorrFile}{\@DefaultCorrFileName}
 
 \newcommand{\UseCorrectionFile}[1]{%
-\renewcommand{\InterCorrFile}{#1}
+    \renewcommand{\InterCorrFile}{#1}
+    \NewCorrectionFile{\InterCorrFile}
 }
 
 % The optional first argument says if you want to include the correction.
