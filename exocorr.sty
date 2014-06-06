@@ -49,17 +49,27 @@
 \newcommand{\corrDraft}{\setcounter{@corrDraft}{1}}
 % When @corrDraft is 1, a tag is added in the document in order to indicate the file name
 
-\newlength{\SymbolWidth}
+
+% June, 5 2014 : I decided not to put the symbol on the left anymore.
+
+%\newlength{\SymbolWidth}
+%\newenvironment{exercice}[1][]{%
+%\refstepcounter{CountExercice}%
+%\setlength{\SymbolWidth}{\widthof{#1}}%
+%\par
+%\noindent%
+%\hspace{-\SymbolWidth}
+%\hspace{-15pt}
+%{\bf #1 \@ExoTheoremName\ \theCountExercice}\noindent\nopagebreak%
+%}{}
+
+
 \newenvironment{exercice}[1][]{%
 \refstepcounter{CountExercice}%
-\setlength{\SymbolWidth}{\widthof{#1}}%
-\par
-\noindent%
-\hspace{-\SymbolWidth}
-\hspace{-15pt}
 {\bf #1 \@ExoTheoremName\ \theCountExercice}\noindent\nopagebreak%
 }{}
-%\newenvironment{exercice}[1]{Exercice}{}
+
+
 
 %\newenvironment{corrige}[1]{\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\label{corr#1}\par\nopagebreak}{}
 \newenvironment{corrige}[1]{\label{corr#1}\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\par\nopagebreak \ifthenelse{\value{@corrDraft}=1}{--#1--}{} }{}
