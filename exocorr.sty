@@ -66,10 +66,8 @@
 
 \newenvironment{exercice}[1][]{%
 \refstepcounter{CountExercice}%
-{\bf #1 \@ExoTheoremName\ \theCountExercice}\noindent\nopagebreak%
+{\bf \@ExoTheoremName\ \theCountExercice} #1 \noindent\nopagebreak%
 }{}
-
-
 
 %\newenvironment{corrige}[1]{\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\label{corr#1}\par\nopagebreak}{}
 \newenvironment{corrige}[1]{\label{corr#1}\par\bigskip\noindent {\bf \@CorrText\ \ref{exo#1}}\par\nopagebreak \ifthenelse{\value{@corrDraft}=1}{--#1--}{} }{}
