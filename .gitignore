@@ -1,0 +1,11 @@
+
+.directory
+.kk.log
+.viminfo
+README.txt~
+corr.tex~
+ess/*
+exocorr.sty~
+fdl-notice.txt~
+gvimkdvi.log
+liste_exo.py~
