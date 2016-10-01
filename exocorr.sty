@@ -50,20 +50,6 @@
 % When @corrDraft is 1, a tag is added in the document in order to indicate the file name
 
 
-% June, 5 2014 : I decided not to put the symbol on the left anymore.
-
-%\newlength{\SymbolWidth}
-%\newenvironment{exercice}[1][]{%
-%\refstepcounter{CountExercice}%
-%\setlength{\SymbolWidth}{\widthof{#1}}%
-%\par
-%\noindent%
-%\hspace{-\SymbolWidth}
-%\hspace{-15pt}
-%{\bf #1 \@ExoTheoremName\ \theCountExercice}\noindent\nopagebreak%
-%}{}
-
-
 \newenvironment{exercice}[1][]{%
 \refstepcounter{CountExercice}%
 {\bf \@ExoTheoremName\ \theCountExercice} #1 \noindent\nopagebreak%
@@ -127,16 +113,24 @@
     \NewCorrectionFile{\InterCorrFile}
 }
 
+\newcommand{\exoDirectory}{./}
+
 % The optional first argument says if you want to include the correction.
 % \Exo{bla}  will include the correction (if exists)
 % \Exo[0]{bla} will not include the correction, even if it exists
+
+% The files are searched in the directory given by '\exoDirectory'. 
+% Default : the current directory.
+% In order to change : \renewcommand{\exoDiretory}{mydir/}    Do not forget the slash.
+
+
 \newcommand{\Exo}[2][1]{%
-\input{exo#2}
+\input{\exoDirectory exo#2}
 \ifthenelse{\value{@corrDraft}=1}{--#2--}{}%
 \ifthenelse{#1=1}{
-\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{corr#2.tex}{\input{corr#2}}{}}{}
+\ifthenelse{\value{@CorrPosition}=1}{\IfFileExists{\exoDirectory corr#2.tex}{\input{\exoDirectory corr#2}}{}}{}
 %\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\import{\CorrectionRepertory}{corr#2}}}{}}{}
-\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\input{corr#2}}}{}}{}
+\ifthenelse{\value{@CorrPosition}=2}{\IfFileExists{\exoDirectory corr#2.tex}{\WriteInFile{\InterCorrFile}{\string\input{\exoDirectory corr#2}}}{}}{}
 }
 {}
 }
