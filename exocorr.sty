@@ -150,44 +150,15 @@
 % Ces histoires de \newwrite pour écrire dans un fichier sont par exemple expliquées sur le fctt [1]
 % Le \immediate vient de la discussion fctt [2]
 
-% The following uses xstring in order to replace specific characters by %xx codes.
-% See the table http://www.utf8-chartable.de/
-\newcommand{\MakeUTFPerCent}[1]{% 
-   \StrSubstitute{#1}({\%28}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}){\%29}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{à}{\%C3\%A0}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{â}{\%C3\%A2}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{ç}{\%C3\%A7}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{è}{\%C3\%A8}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{é}{\%C3\%A9}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{ê}{\%C3\%AA}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{ù}{\%C3\%B9}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{û}{\%C3\%BB}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}{ô}{\%C3\%B4}[\result]% 
-   \expandafter\StrSubstitute\expandafter{\result}_{\_}[\result]% 
-} 
 
-   %\expandafter\StrSubstitute\expandafter{\result}{#}{\%23}[\result]%       If you want a # in the URL you still have to write \# in the source.
+%%%%%%%%%%
+% References to Wikipedia
+% I suppressed the command \wikipedia and \wikiversity on May 2, 2018.
+% They are copied directly in mazhe.tex
 
-%------------------------
-% Links to wikipedia.
-%------------------------
-% Typical use is
-% \wikipedia{fr}{Norme_(mathématiques)}{Norme}
-% It creates the link \href to the right page on wikipedia, replacing special characters by their respective %xx codes.
-\newcommand{\wikipedia}[3]{% 
-   \saveexpandmode\noexpandarg 
-   \MakeUTFPerCent{#2}% 
-   \restoreexpandmode 
-   \href{http://#1.wikipedia.org/wiki/\result}{#3}% 
-} 
 
-\newcommand{\wikiversity}[3]{% 
-   \saveexpandmode\noexpandarg 
-   \MakeUTFPerCent{#2}% 
-   \restoreexpandmode 
-   \href{http://#1.wikiversity.org/wiki/\result}{#3}% 
-} 
+
+
 \endinput
 
 % [1] http://groups.google.fr/group/fr.comp.text.tex/browse_thread/thread/76eb44e2e928ba8b/ab0f092c79a062cd?hl=fr&lnk=gst&q=newwrite#ab0f092c79a062cd 
